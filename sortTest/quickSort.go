@@ -1,0 +1,31 @@
+package main
+import "fmt"
+func QucikSort(arr []int) [] int{
+	if len(arr) <= 1{
+		return arr
+	}
+	splitdata := arr[0]  //第一个数据
+	low := make([]int,0,0) //小的数据
+	hight := make([]int,0,0) //大的数据
+	mid := make([]int,0,0) //一样大的数据
+	mid = append(mid,splitdata) //一样大的数据
+	for i:=1 ; i < len(arr);i++ {
+		if arr[i] < splitdata {
+			low = append(low,arr[i])
+		}else if arr[i] >splitdata{
+			hight = append(hight,arr[i])
+		}else{
+			mid = append(mid,arr[i])
+		}
+	}
+	low,hight = QucikSort(low),QucikSort(hight)
+	myarr := append(append(low,mid...),hight...)
+	return myarr 
+	
+}
+
+//快速排序算法
+func main(){
+	arr := []int{1,9,10,30,2,5,45,8,1} 
+	fmt.Println(QucikSort(arr))
+}
