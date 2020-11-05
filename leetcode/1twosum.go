@@ -8,19 +8,51 @@
 // 因为 nums[0] + nums[1] = 2 + 7 = 9
 // 所以返回 [0, 1]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 package main
 import "fmt"
 
+// func towSum(nums []int,target int) []int{
+// 	len :=len(nums)
+// 	for i:=0;i<len;i++ {
+// 		for j:=i+1;j<len;j++{
+// 			if nums[i]+nums[j] == target {
+// 				return []int{i,j}
+// 			}
+// 		}
+// 	}
+// 	return []int{}
+// }
+
+
 func towSum(nums []int,target int) []int{
+	mapVal := make(map[int]int)
 	len :=len(nums)
 	for i:=0;i<len;i++ {
-		for j:=i+1;j<len;j++{
-			if nums[i]+nums[j] == target {
-				return []int{i,j}
-			}
+		res := target-nums[i]
+		v,ok := mapVal[res]
+		if ok {
+			return []int{v,i}
 		}
+		mapVal[nums[i]] = i
 	}
-	return []int{}
+	return []int{-1,-1}
 }
 
 func main(){
